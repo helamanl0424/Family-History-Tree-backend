@@ -1,5 +1,6 @@
 const express = require('express');
 const { Pool } = require('pg');
+require('dotenv').config();
 
 const app = express();
 const PORT = 5000;  // Port where the server will listen
@@ -9,11 +10,11 @@ app.use(express.json());
 
 // Setting up PostgreSQL connection
 const pool = new Pool({
-  user: 'postgres',     // Replace with your PostgreSQL username
-  host: 'localhost',        // Database host
-  database: 'family_tree',  // Replace with your database name
-  password: '*****', // Replace with your database password
-  port: 5432,               // PostgreSQL port, typically 5432 by default
+  user: process.env.DB_USER,         // Replace with your PostgreSQL username
+  host: process.env.DB_HOST,         // Database host
+  database: process.env.DB_NAME,     // Replace with your database name
+  password: process.env.DB_PASSWORD, // Replace with your database password
+  port: process.env.DB_PORT          // PostgreSQL port, typically 5432 by default
 });
 
 // Example route: Get all persons from your database
